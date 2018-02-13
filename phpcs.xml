@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<ruleset name="PMB">
+    <description>Everythingfashion</description>
+    <!-- Show colors in console -->
+    <arg value="-colors"/>
+    <!-- Show sniff codes in all reports -->
+    <arg value="s"/>
+    <!-- Use PSR-2 as a base -->
+    <rule ref="PSR2"/>
+    <file>app/Console</file>
+    <!--<file>app/Events</file>-->
+    <file>app/Exceptions</file>
+    <file>app/Http</file>
+    <!--<file>app/Listeners</file>-->
+    <!--<file>app/Mail</file>-->
+    <!--<file>app/Models</file>-->
+    <file>app/Repositories</file>
+    <file>app/Providers</file>
+    <!--<file>app/Services</file>-->
+    <file>tests/Unit</file>
+    <file>tests/Feature</file>
+</ruleset>
