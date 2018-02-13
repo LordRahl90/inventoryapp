@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateRoleUserRequest;
 use App\Http\Requests\UpdateRoleUserRequest;
+use App\Models\Admin\Role;
+use App\Models\User;
 use App\Repositories\RoleUserRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
@@ -43,7 +45,20 @@ class RoleUserController extends AppBaseController
      */
     public function create()
     {
-        return view('role_users.create');
+        $userArray=[""=>"Select User"];
+        $rolesArray=[""=>"Select Role"];
+
+        $users=User::all();
+        foreach ($users as $user){
+            $userArray[$user->id]=$user->surname.' '.$user->other_names;
+        }
+
+        $roles=Role::all();
+
+        foreach ($roles as $role){
+            $rolesArray[$role->id]=$role->display_name;
+        }
+        return view('role_users.create',["users"=>$userArray,"roles"=>$rolesArray]);
     }
 
     /**
@@ -93,6 +108,20 @@ class RoleUserController extends AppBaseController
      */
     public function edit($id)
     {
+        $userArray=[""=>"Select User"];
+        $rolesArray=[""=>"Select Role"];
+
+        $users=User::all();
+        foreach ($users as $user){
+            $userArray[$user->id]=$user->surname.' '.$user->other_names;
+        }
+
+        $roles=Role::all();
+
+        foreach ($roles as $role){
+            $rolesArray[$role->id]=$role->display_name;
+        }
+
         $roleUser = $this->roleUserRepository->findWithoutFail($id);
 
         if (empty($roleUser)) {
@@ -101,7 +130,7 @@ class RoleUserController extends AppBaseController
             return redirect(route('roleUsers.index'));
         }
 
-        return view('role_users.edit')->with('roleUser', $roleUser);
+        return view('role_users.edit',["users"=>$userArray,"roles"=>$rolesArray])->with('roleUser', $roleUser);
     }
 
     /**

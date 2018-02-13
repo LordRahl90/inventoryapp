@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateUsersTable extends Migration
+class CreatePhotoshopProcessesTable extends Migration
 {
 
     /**
@@ -13,15 +13,11 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('photoshop_processes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('username');
-            $table->string('password');
-            $table->string('surname');
-            $table->string('other_names');
-            $table->string('email');
-            $table->string('phone');
-            $table->string('remember_token')->nullable();
+            $table->string('title');
+            $table->string('image');
+            $table->text('description');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -34,6 +30,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users');
+        Schema::drop('photoshop_processes');
     }
 }

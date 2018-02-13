@@ -12,8 +12,8 @@ class RoleSeeder extends Seeder
     public function run()
     {
         $roles=[
-            ["merchant","Finance","Finance Roles"],
-            ["customer","Regular","Regular Roles"],
+            ["finance","Finance","Finance Roles"],
+            ["regular","Regular","Regular Roles"],
             ["admin","Admin","Admin Roles"]
         ];
 

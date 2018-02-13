@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @SWG\Definition(
- *      definition="RoleUser",
- *      required={"user_id", "role_id"},
+ *      definition="PhotoshopProcess",
+ *      required={"title", "image", "description"},
  *      @SWG\Property(
  *          property="id",
  *          description="id",
@@ -16,16 +16,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *          format="int32"
  *      ),
  *      @SWG\Property(
- *          property="user_id",
- *          description="user_id",
- *          type="integer",
- *          format="int32"
+ *          property="title",
+ *          description="title",
+ *          type="string"
  *      ),
  *      @SWG\Property(
- *          property="role_id",
- *          description="role_id",
- *          type="integer",
- *          format="int32"
+ *          property="image",
+ *          description="image",
+ *          type="string"
+ *      ),
+ *      @SWG\Property(
+ *          property="description",
+ *          description="description",
+ *          type="string"
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -41,19 +44,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *      )
  * )
  */
-class RoleUser extends Model
+class PhotoshopProcess extends Model
 {
-//    use SoftDeletes;
+    use SoftDeletes;
 
-    public $table = 'role_user';
+    public $table = 'photoshop_processes';
     
 
     protected $dates = ['deleted_at'];
 
 
     public $fillable = [
-        'user_id',
-        'role_id'
+        'title',
+        'image',
+        'description'
     ];
 
     /**
@@ -62,8 +66,9 @@ class RoleUser extends Model
      * @var array
      */
     protected $casts = [
-        'user_id' => 'integer',
-        'role_id' => 'integer'
+        'title' => 'string',
+        'image' => 'string',
+        'description' => 'string'
     ];
 
     /**
@@ -72,8 +77,9 @@ class RoleUser extends Model
      * @var array
      */
     public static $rules = [
-        'user_id' => 'required|unique:role_user,user_id',
-        'role_id' => 'required'
+        'title' => 'required',
+        'image' => 'required',
+        'description' => 'required'
     ];
 
     

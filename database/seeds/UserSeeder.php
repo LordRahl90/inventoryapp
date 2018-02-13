@@ -11,13 +11,44 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::create([
-            'username'=>'lordrahl',
-            'password'=>\Illuminate\Support\Facades\Hash::make('fabregas'),
-            'surname'=>'Alugbin',
-            'other_names'=>'Abiodun Olutola',
-            'email'=>'tolaabbey009@gmail.com',
-            'phone'=>'07033304280'
-        ]);
+
+        $users=[
+            [
+                "username"=>"regular",
+                "password"=>"regular1234",
+                "surname"=>"Regular",
+                "other_names"=>"Regular User",
+                "email"=>"regular@user.com",
+                "phone"=>"123455"
+            ],
+            [
+                "username"=>"finance",
+                "password"=>"finance1234",
+                "surname"=>"Finance",
+                "other_names"=>"Finance User",
+                "email"=>"finance@user.com",
+                "phone"=>"123455"
+            ],
+
+            [
+                "username"=>"admin",
+                "password"=>"admin1234",
+                "surname"=>"Admin",
+                "other_names"=>"Admin User",
+                "email"=>"admin@user.com",
+                "phone"=>"123455"
+            ]
+        ];
+
+        foreach ($users as $user){
+            \App\Models\User::create([
+                'username'=>$user["username"],
+                'password'=>\Illuminate\Support\Facades\Hash::make($user["password"]),
+                'surname'=>$user["surname"],
+                'other_names'=>$user["other_names"],
+                'email'=>$user["email"],
+                'phone'=>$user["phone"]
+            ]);
+        }
     }
 }

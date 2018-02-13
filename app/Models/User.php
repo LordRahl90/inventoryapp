@@ -84,7 +84,7 @@ class User extends Model
         'other_names',
         'email',
         'phone',
-        'role_id'
+        'remember_token'
     ];
 
     /**
@@ -99,7 +99,7 @@ class User extends Model
         'other_names' => 'string',
         'email' => 'string',
         'phone' => 'string',
-        'role_id' => 'integer'
+        'remember_token'=>'string'
     ];
 
     /**
@@ -113,8 +113,7 @@ class User extends Model
         'surname' => 'required',
         'other_names' => 'required',
         'email' => 'required|unique:users,email',
-        'phone' => 'required|unique:users,phone',
-        'role_id' => 'required'
+        'phone' => 'required|unique:users,phone'
     ];
 
 
@@ -122,15 +121,6 @@ class User extends Model
     {
         $this->restoreA();
         $this->restoreB();
-    }
-
-
-    public function tokens(){
-        return $this->hasOne('App\Models\Merchant\MerchantToken','merchant_id','id');
-    }
-
-    public function bankAccount(){
-        return $this->hasOne('App\Models\Merchant\MerchantBank','merchant_id','id');
     }
 
 

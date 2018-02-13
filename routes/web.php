@@ -48,3 +48,5 @@ Route::resource('roleUsers', 'RoleUserController');
 Route::resource('wordProcesses', 'WordProcessController');
 
 Route::resource('sageProcesses', 'SageProcessController');
+
+Route::resource('photoshopProcesses', 'PhotoshopProcessController');
