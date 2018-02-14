@@ -2,7 +2,7 @@
     <thead>
         <tr>
             <th>Username</th>
-        <th>Password</th>
+        {{--<th>Password</th>--}}
         <th>Surname</th>
         <th>Other Names</th>
         <th>Email</th>
@@ -15,7 +15,7 @@
     @foreach($users as $user)
         <tr>
             <td>{!! $user->username !!}</td>
-            <td>{!! $user->password !!}</td>
+            {{--<td>{!! $user->password !!}</td>--}}
             <td>{!! $user->surname !!}</td>
             <td>{!! $user->other_names !!}</td>
             <td>{!! $user->email !!}</td>
