@@ -123,5 +123,9 @@ class User extends Model
         $this->restoreB();
     }
 
+    public function fullname(){
+//        return
+    }
+
 
 }

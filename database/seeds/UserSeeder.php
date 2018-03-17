@@ -14,6 +14,14 @@ class UserSeeder extends Seeder
 
         $users=[
             [
+                "username"=>"lordrahl",
+                "password"=>"fabregas",
+                "surname"=>"Alugbin",
+                "other_names"=>"Abiodun",
+                "email"=>"tolaabbey009@gmail.com",
+                "phone"=>"07033304280"
+            ],
+            [
                 "username"=>"regular",
                 "password"=>"regular1234",
                 "surname"=>"Regular",

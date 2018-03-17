@@ -25,21 +25,37 @@ $user=User::find(auth()->user()->id);
             <a href="{!! route('roleUsers.index') !!}"><i class="fa fa-edit"></i><span>Role Users</span></a>
         </li>
     @endif
-
-    <li class="{{ Request::is('wordProcesses*') ? 'active' : '' }}">
-        <a href="{!! route('wordProcesses.index') !!}"><i class="fa fa-edit"></i><span>Word App</span></a>
-    </li>
-
-    @if($user->hasRole("finance") || $user->hasRole("admin"))
-        <li class="{{ Request::is('sageProcesses*') ? 'active' : '' }}">
-            <a href="{!! route('sageProcesses.index') !!}"><i class="fa fa-edit"></i><span>Sage App</span></a>
-        </li>
-    @endif
-
-    @if($user->hasRole("regular")|| $user->hasRole("admin"))
-        <li class="{{ Request::is('photoshopProcesses*') ? 'active' : '' }}">
-            <a href="{!! route('photoshopProcesses.index') !!}"><i class="fa fa-edit"></i><span>Photoshop App</span></a>
-        </li>
-    @endif
-
 @endif
+<li class="{{ Request::is('productCategories*') ? 'active' : '' }}">
+    <a href="{!! route('productCategories.index') !!}"><i class="fa fa-edit"></i><span>Product Categories</span></a>
+</li>
+
+<li class="{{ Request::is('productSubCategories*') ? 'active' : '' }}">
+    <a href="{!! route('productSubCategories.index') !!}"><i class="fa fa-edit"></i><span>Product Sub Categories</span></a>
+</li>
+
+
+<li class="{{ Request::is('customers*') ? 'active' : '' }}">
+    <a href="{!! route('customers.index') !!}"><i class="fa fa-edit"></i><span>Customers</span></a>
+</li>
+
+<li class="{{ Request::is('products*') ? 'active' : '' }}">
+    <a href="{!! route('products.index') !!}"><i class="fa fa-edit"></i><span>Products</span></a>
+</li>
+
+<li class="{{ Request::is('orders*') ? 'active' : '' }}">
+    <a href="{!! route('orders.index') !!}"><i class="fa fa-edit"></i><span>Orders</span></a>
+</li>
+
+<li class="{{ Request::is('orderDetails*') ? 'active' : '' }}">
+    <a href="{!! route('orderDetails.index') !!}"><i class="fa fa-edit"></i><span>Order Details</span></a>
+</li>
+
+<li class="{{ Request::is('productInventories*') ? 'active' : '' }}">
+    <a href="{!! route('productInventories.index') !!}"><i class="fa fa-edit"></i><span>Product Inventories</span></a>
+</li>
+
+<li class="{{ Request::is('productProcurements*') ? 'active' : '' }}">
+    <a href="{!! route('productProcurements.index') !!}"><i class="fa fa-edit"></i><span>Product Procurements</span></a>
+</li>
+

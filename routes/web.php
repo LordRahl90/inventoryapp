@@ -49,6 +49,18 @@ Route::group(["middleware"=>["role:admin"]], function(){
 });
 
 
-Route::resource('sageProcesses', 'SageProcessController')->middleware("role:finance");
-Route::resource('photoshopProcesses', 'PhotoshopProcessController')->middleware("role:regular");
-Route::resource('wordProcesses', 'WordProcessController')->middleware("auth");
+Route::resource('productCategories', 'ProductCategoryController');
+
+Route::resource('productSubCategories', 'ProductSubCategoryController');
+
+Route::resource('customers', 'CustomerController');
+
+Route::resource('products', 'ProductController');
+
+Route::resource('orders', 'OrderController');
+
+Route::resource('orderDetails', 'OrderDetailController');
+
+Route::resource('productInventories', 'ProductInventoryController');
+
+Route::resource('productProcurements', 'ProductProcurementController');

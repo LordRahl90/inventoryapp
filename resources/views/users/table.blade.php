@@ -15,7 +15,6 @@
     @foreach($users as $user)
         <tr>
             <td>{!! $user->username !!}</td>
-            {{--<td>{!! $user->password !!}</td>--}}
             <td>{!! $user->surname !!}</td>
             <td>{!! $user->other_names !!}</td>
             <td>{!! $user->email !!}</td>

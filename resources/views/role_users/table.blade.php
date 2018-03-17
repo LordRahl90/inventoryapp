@@ -1,16 +1,16 @@
 <table class="table table-responsive" id="roleUsers-table">
     <thead>
         <tr>
-            <th>User Id</th>
-        <th>Role Id</th>
+            <th>User</th>
+            <th>Role</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
     <tbody>
     @foreach($roleUsers as $roleUser)
         <tr>
-            <td>{!! $roleUser->user_id !!}</td>
-            <td>{!! $roleUser->role_id !!}</td>
+            <td>{!! $roleUser->user->surname.' '.$roleUser->user->other_names !!}</td>
+            <td>{!! $roleUser->role->display_name !!}</td>
             <td>
                 {!! Form::open(['route' => ['roleUsers.destroy', $roleUser->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

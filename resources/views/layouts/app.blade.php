@@ -5,12 +5,12 @@
     <title>RoleBasedSystem</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    {{--<link rel="stylesheet" href="{{ asset("product/assets/css/bootstrap.min.css") }}">--}}
+    {{--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
+    <link rel="stylesheet" href="{{ asset("product/assets/css/bootstrap.min.css") }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/css/AdminLTE.min.css">
-    {{--<link rel="stylesheet" href="{{ asset("product/dist/css/AdminLTE.min.css") }}">--}}
+    {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.11/css/AdminLTE.min.css">--}}
+    <link rel="stylesheet" href="{{ asset("product/dist/css/AdminLTE.min.css") }}">
     <link rel="stylesheet" href="{{ asset("product/dist/css/skins/_all-skins.min.css") }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/_all.css">
 
@@ -30,7 +30,7 @@
 
             <!-- Logo -->
             <a href="#" class="logo">
-                <b>Everything</b>Fashion
+                <b>Inventory</b>Manager
             </a>
 
             <!-- Header Navbar -->
@@ -93,7 +93,7 @@
 
         <!-- Main Footer -->
         <footer class="main-footer" style="max-height: 100px;text-align: center">
-            <strong>Copyright © {{ Date('Y') }} <a href="http://www.everythingfashion.com">everythingfashion&trade;</a>.</strong> All rights reserved.
+            <strong>Copyright © {{ Date('Y') }} <a href="http://www.inventoryapp.com">inventoryapp&trade;</a>.</strong> All rights reserved.
         </footer>
 
     </div>
@@ -113,7 +113,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{!! url('/') !!}">
-                    EverythingFashion
+                    InventoryApp
                 </a>
             </div>
 
