@@ -51,6 +51,10 @@ class ProductReportController extends Controller
             "productID"=>$productID
         ]);
 
+        if(count($result)<=0){
+            dd("There has been nooperation thus far");
+        }
+
         if($format==0){
             //go to pdf page
             return $this->generatePDF($inputData,json_encode($result));
