@@ -75,6 +75,8 @@ class OrderController extends AppBaseController
           CustomerRepository $customerRepository,
         OrderDetailRepository $orderDetailRepository)
     {
+
+        dd($request->all());
         DB::beginTransaction();
         try{
             $input = $request->all();
@@ -89,6 +91,7 @@ class OrderController extends AppBaseController
                     "customerEmail"=>"required",
                     "customerAddress"=>"required"
                 ]);
+
                 if($v->fails()){
                     Flash::error($v->messages()->all());
                     return redirect(route('orders.index'));
