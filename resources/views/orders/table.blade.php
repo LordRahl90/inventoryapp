@@ -1,9 +1,9 @@
 <table class="table table-responsive" id="orders-table">
     <thead>
         <tr>
-            <th>Orderref</th>
-        <th>Customerid</th>
-        <th>Customerphone</th>
+            <th>Order Ref</th>
+            <th>Customerid</th>
+            <th>Customerphone</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>

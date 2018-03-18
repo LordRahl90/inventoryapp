@@ -79,7 +79,7 @@ class Order extends Model
      */
     public static $rules = [
         'orderRef' => 'required',
-        'customerID' => 'required|exists:customers,id',
+//        'customerID' => 'required|exists:customers,id',
         'customerPhone' => 'required'
     ];
 

@@ -23,10 +23,12 @@ class ProductController extends AppBaseController
     }
 
     /**
+     *
      * Display a listing of the Product.
      *
      * @param Request $request
-     * @return Response
+     * @return $this
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function index(Request $request)
     {
@@ -52,7 +54,8 @@ class ProductController extends AppBaseController
         }
 
         return view('products.create',[
-            "categories"=>$categoryArray
+            "categories"=>$categoryArray,
+            "subCategories"=>null
         ]);
     }
 
@@ -97,12 +100,19 @@ class ProductController extends AppBaseController
     /**
      * Show the form for editing the specified Product.
      *
-     * @param  int $id
-     *
-     * @return Response
+     * @param $id
+     * @param ProductCategoryRepository $categoryRepository
+     * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function edit($id)
+    public function edit($id,ProductCategoryRepository $categoryRepository)
     {
+        $categories=$categoryRepository->orderBy("category","asc")->get();
+        $categoryArray=[""=>"SelectCategory"];
+        $subCategoryArray=[""=>"Select SubCategory"];
+
+        foreach ($categories as $category){
+            $categoryArray[$category->id]=$category->category;
+        }
         $product = $this->productRepository->findWithoutFail($id);
 
         if (empty($product)) {
@@ -111,7 +121,12 @@ class ProductController extends AppBaseController
             return redirect(route('products.index'));
         }
 
-        return view('products.edit')->with('product', $product);
+        $subCategoryArray[$product->sub_category->id]=$product->sub_category->sub_category;
+
+        return view('products.edit',[
+            "categories"=>$categoryArray,
+            "subCategories"=>$subCategoryArray
+        ])->with('product', $product);
     }
 
     /**

@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Repositories\CustomerRepository;
 use App\Repositories\OrderRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
@@ -41,9 +45,17 @@ class OrderController extends AppBaseController
      *
      * @return Response
      */
-    public function create()
+    public function create(ProductRepository $productRepository)
     {
-        return view('orders.create');
+        $productsArray=[""=>"Select Product"];
+
+        $products=$productRepository->orderBy("name","asc")->all();
+        foreach ($products as $product){
+            $productsArray[$product->id]=$product->name;
+        }
+        return view('orders.create',[
+            "products"=>$productsArray
+        ]);
     }
 
     /**
@@ -53,14 +65,40 @@ class OrderController extends AppBaseController
      *
      * @return Response
      */
-    public function store(CreateOrderRequest $request)
+    public function store(CreateOrderRequest $request,CustomerRepository $customerRepository)
     {
-        $input = $request->all();
+        DB::beginTransaction();
+        try{
+            $input = $request->all();
+            $customerID=$input["customerID"];
 
-        $order = $this->orderRepository->create($input);
+            if($customerID==null){
 
-        Flash::success('Order saved successfully.');
+                $v=Validator::make($input,[
+                    "customerPhone"=>"required",
+                    "customerFirstname"=>"required",
+                    "customerOthernames"=>"required",
+                    "customerEmail"=>"required",
+                    "customerAddress"=>"required"
+                ]);
+                if($v->fails()){
+                    Flash::error($v->messages()->all());
+                    return redirect(route('orders.index'));
+                }
+                $customerID=$customerRepository->create([])
+        }
 
+            dd($customerID);
+            dd($input);
+
+            $order = $this->orderRepository->create($input);
+
+            Flash::success('Order saved successfully.');
+        }
+        catch(\Exception $ex){
+            DB::rollBack();
+            Flash::error("An error occurred");
+        }
         return redirect(route('orders.index'));
     }
 

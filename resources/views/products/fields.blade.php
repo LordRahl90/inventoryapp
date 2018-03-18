@@ -7,7 +7,7 @@
 <!-- Product Sub Category Id Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('product_sub_category_id', 'Product Sub Category:') !!}
-    {!! Form::select('product_sub_category_id', [], null, ['class' => 'form-control']) !!}
+    {!! Form::select('product_sub_category_id', $subCategories, $product->sub_category->id, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Name Field -->

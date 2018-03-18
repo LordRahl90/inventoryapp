@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>RoleBasedSystem</title>
+    <title>InventoryApp</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
     {{--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
@@ -154,6 +154,7 @@
 
     <!-- AdminLTE App -->
     <script src="{{ asset("product/dist/js/app.min.js") }}"></script>
+    <script src="{{ asset("/js/utility.js") }}"></script>
 
     @yield('scripts')
 </body>

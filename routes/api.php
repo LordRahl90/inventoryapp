@@ -19,4 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::resource('users', 'UserAPIController');
+Route::get("customer/{phone}",'CustomerAPIController@fetchByPhone');
 Route::resource("categories",'CategoryAPIController');
