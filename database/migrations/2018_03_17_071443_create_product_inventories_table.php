@@ -18,7 +18,7 @@ class CreateProductInventoriesTable extends Migration
             $table->integer('productID')->unsigned();
             $table->string('inventoryRef');
             $table->double('quantity_in', 30, 2);
-            $table->double('quantity_out', 30, 10);
+            $table->double('quantity_out', 30, 2);
             $table->text('narration');
             $table->timestamps();
             $table->softDeletes();

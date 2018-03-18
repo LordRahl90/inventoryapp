@@ -1,7 +1,7 @@
 <table class="table table-responsive" id="orderDetails-table">
     <thead>
         <tr>
-            <th>Orderid</th>
+        <th>Orderid</th>
         <th>Productid</th>
         <th>Quantity</th>
         <th>Price</th>

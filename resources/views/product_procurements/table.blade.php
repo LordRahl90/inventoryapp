@@ -1,8 +1,8 @@
 <table class="table table-responsive" id="productProcurements-table">
     <thead>
         <tr>
-            <th>Productid</th>
-        <th>Documentref</th>
+            <th>Product</th>
+        <th>Document Ref</th>
         <th>Narration</th>
         <th>Quantity</th>
         <th>Price</th>

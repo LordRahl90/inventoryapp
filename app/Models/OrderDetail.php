@@ -94,5 +94,12 @@ class OrderDetail extends Model
         'price' => 'required'
     ];
 
+    public function order(){
+        return $this->belongsTo("App\Models\Order","orderID","id");
+    }
+
+    public function product(){
+        return $this->belongsTo("App\Models\Product","productID","id");
+    }
     
 }

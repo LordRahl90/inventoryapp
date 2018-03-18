@@ -97,5 +97,8 @@ class Customer extends Model
         'phone' => 'required|unique:customers,phone'
     ];
 
+    public function orders(){
+        return $this->hasMany("App\Models\Orders","customerID","id");
+    }
     
 }

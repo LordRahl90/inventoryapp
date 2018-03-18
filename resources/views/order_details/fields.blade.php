@@ -1,13 +1,13 @@
 <!-- Orderid Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('orderID', 'Orderid:') !!}
-    {!! Form::select('orderID', [], null, ['class' => 'form-control']) !!}
+    {!! Form::label('orderID', 'Order Ref:') !!}
+    {!! Form::text('orderID', null, ['class' => 'form-control',"readonly"=>"readonly"]) !!}
 </div>
 
 <!-- Productid Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('productID', 'Productid:') !!}
-    {!! Form::select('productID', [], null, ['class' => 'form-control']) !!}
+    {!! Form::label('productID', 'Product:') !!}
+    {!! Form::text('productID', null, ['class' => 'form-control',"readonly"=>"readonly"]) !!}
 </div>
 
 <!-- Quantity Field -->

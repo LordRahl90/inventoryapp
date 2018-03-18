@@ -83,5 +83,12 @@ class Order extends Model
         'customerPhone' => 'required'
     ];
 
+    public function customer(){
+        return $this->belongsTo("App\Models\Customer","customerID","id");
+    }
+
+    public function orderDetails(){
+        return $this->hasMany("App\Models\OrderDetail","orderID","id");
+    }
     
 }

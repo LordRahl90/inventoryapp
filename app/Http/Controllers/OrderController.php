@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Models\Product;
 use App\Repositories\CustomerRepository;
+use App\Repositories\OrderDetailRepository;
 use App\Repositories\OrderRepository;
 use App\Http\Controllers\AppBaseController;
 use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use Flash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
@@ -59,13 +62,18 @@ class OrderController extends AppBaseController
     }
 
     /**
+     *
      * Store a newly created Order in storage.
      *
      * @param CreateOrderRequest $request
-     *
-     * @return Response
+     * @param CustomerRepository $customerRepository
+     * @param OrderDetailRepository $orderDetailRepository
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(CreateOrderRequest $request,CustomerRepository $customerRepository)
+    public function store(
+        CreateOrderRequest $request,
+          CustomerRepository $customerRepository,
+        OrderDetailRepository $orderDetailRepository)
     {
         DB::beginTransaction();
         try{
@@ -85,20 +93,51 @@ class OrderController extends AppBaseController
                     Flash::error($v->messages()->all());
                     return redirect(route('orders.index'));
                 }
-                $customerID=$customerRepository->create([])
-        }
+                $customerID=$customerRepository->create([
+                    "firstname"=>$input["customerFirstname"],
+                    "other_names"=>$input["customerOthernames"],
+                    "email"=>$input["customerEmail"],
+                    "address"=>$input["customerAddress"],
+                    "phone"=>$input["customerPhone"]
+                ])->id;
+            }
 
-            dd($customerID);
-            dd($input);
-
+            $input["customerID"]=$customerID;
+            $input["status"]=false;
             $order = $this->orderRepository->create($input);
+
+            $products=$input["productID"];
+            $quantities=$input["quantity"];
+
+            for($i=0; $i<count($products); $i++){
+                $product=$products[$i];
+                $quantity=$quantities[$i];
+
+                if($product!=null && $quantity!=null){
+                    $price=Product::find($product)->price;
+
+                    $orderDetail=$orderDetailRepository->create([
+                        "orderID"=>$order->id,
+                        "productID"=>$product,
+                        "price"=>$price,
+                        "quantity"=>$quantity
+                    ]);
+
+                    if(!$orderDetail){
+                        Log::info("An error occurred While creating an order detail");
+                    }
+                }
+            }
 
             Flash::success('Order saved successfully.');
         }
         catch(\Exception $ex){
             DB::rollBack();
+            dd($ex->getMessage());
             Flash::error("An error occurred");
         }
+
+        DB::commit();
         return redirect(route('orders.index'));
     }
 
@@ -129,9 +168,15 @@ class OrderController extends AppBaseController
      *
      * @return Response
      */
-    public function edit($id)
+    public function edit($id,ProductRepository $productRepository)
     {
         $order = $this->orderRepository->findWithoutFail($id);
+        $productsArray=[""=>"Select Product"];
+
+        $products=$productRepository->orderBy("name","asc")->all();
+        foreach ($products as $product){
+            $productsArray[$product->id]=$product->name;
+        }
 
         if (empty($order)) {
             Flash::error('Order not found');
@@ -139,7 +184,7 @@ class OrderController extends AppBaseController
             return redirect(route('orders.index'));
         }
 
-        return view('orders.edit')->with('order', $order);
+        return view('orders.edit',["products"=>$productsArray])->with('order', $order);
     }
 
     /**

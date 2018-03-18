@@ -181,6 +181,8 @@ return [
         Milon\Barcode\BarcodeServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
+        ConsoleTVs\Invoices\InvoicesServiceProvider::class,
+
 
         /*
          * Application Service Providers...

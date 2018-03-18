@@ -1,8 +1,8 @@
 <table class="table table-responsive" id="productInventories-table">
     <thead>
         <tr>
-            <th>Productid</th>
-        <th>Inventoryref</th>
+            <th>Product</th>
+        <th>Inventory Ref</th>
         <th>Quantity In</th>
         <th>Quantity Out</th>
         <th>Narration</th>

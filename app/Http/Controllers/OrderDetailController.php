@@ -73,7 +73,7 @@ class OrderDetailController extends AppBaseController
      */
     public function show($id)
     {
-        $orderDetail = $this->orderDetailRepository->findWithoutFail($id);
+        $orderDetail = $this->orderDetailRepository->with("order","product")->findWithoutFail($id);
 
         if (empty($orderDetail)) {
             Flash::error('Order Detail not found');
@@ -81,7 +81,7 @@ class OrderDetailController extends AppBaseController
             return redirect(route('orderDetails.index'));
         }
 
-        return view('order_details.show')->with('orderDetail', $orderDetail);
+        return view('order_details.show');//->with('orderDetail', $orderDetail);
     }
 
     /**
@@ -93,7 +93,7 @@ class OrderDetailController extends AppBaseController
      */
     public function edit($id)
     {
-        $orderDetail = $this->orderDetailRepository->findWithoutFail($id);
+        $orderDetail = $this->orderDetailRepository->with("order","product")->findWithoutFail($id);
 
         if (empty($orderDetail)) {
             Flash::error('Order Detail not found');
@@ -126,7 +126,7 @@ class OrderDetailController extends AppBaseController
 
         Flash::success('Order Detail updated successfully.');
 
-        return redirect(route('orderDetails.index'));
+        return redirect(route('orders.index'));
     }
 
     /**

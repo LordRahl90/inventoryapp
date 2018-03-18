@@ -2,8 +2,8 @@
     <thead>
         <tr>
             <th>Order Ref</th>
-            <th>Customerid</th>
-            <th>Customerphone</th>
+            <th>Customer</th>
+            <th>Customer Phone</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
@@ -11,8 +11,9 @@
     @foreach($orders as $order)
         <tr>
             <td>{!! $order->orderRef !!}</td>
-            <td>{!! $order->customerID !!}</td>
+            <td>{!! $order->customer->firstname.' '.$order->customer->other_names !!}</td>
             <td>{!! $order->customerPhone !!}</td>
+            <td>{!! $order->status?"Processed":"Pending" !!}</td>
             <td>
                 {!! Form::open(['route' => ['orders.destroy', $order->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>

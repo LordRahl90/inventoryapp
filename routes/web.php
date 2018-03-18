@@ -20,7 +20,6 @@ Auth::routes();
 Route::get('/home', 'Admin\HomeController@index');
 
 
-
 Route::group(["middleware"=>["role:admin"]], function(){
 
     Route::resource('users', 'UserController');
@@ -64,3 +63,6 @@ Route::resource('orderDetails', 'OrderDetailController');
 Route::resource('productInventories', 'ProductInventoryController');
 
 Route::resource('productProcurements', 'ProductProcurementController');
+
+Route::get("orders/print/{orderRef}",["as"=>"orders.print","uses"=>"OrderProcessController@print"]);
+Route::get("orders/process/{orderRef}",["as"=>"orders.process","uses"=>"OrderProcessController@process"]);
