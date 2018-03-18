@@ -42,7 +42,7 @@ class ProductReportController extends Controller
 
         $sql="SELECT pr.name as productName,pi.productID,pi.quantity_in, pi.quantity_out, pi.created_at, @balance := @balance + pi.quantity_in - pi.quantity_out AS balance
               FROM (product_inventories pi INNER JOIN products pr on pr.id=pi.productID),(SELECT @balance := 0) bl 
-              WHERE productID=$productID AND pi.created_at BETWEEN '$startDate' AND '$endDate' ";
+              WHERE productID=".$productID." AND pi.created_at BETWEEN '".$startDate."' AND '".$endDate."' ";
             $result=$db->query($sql)->fetchAll(\PDO::FETCH_ASSOC);
 
         $inputData=json_encode([
