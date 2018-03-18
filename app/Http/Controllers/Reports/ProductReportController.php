@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 use niklasravnsborg\LaravelPdf\Pdf;
 
@@ -38,6 +39,16 @@ class ProductReportController extends Controller
         $startDate=Input::get("startDate")." 00:00:00";
         $endDate=Input::get("endDate")." 23:59:59";
 
+        $v=Validator::mak(Input::all(),[
+            "productID"=>"required",
+            "reportFormat"=>"required",
+            "startDate"=>"required",
+            "endDate"=>"required"
+        ]);
+
+        if($v->fails()){
+            dd($v->messages()->all());
+        }
         $db=DB::getPDO();
 
         $sql="SELECT pr.name as productName,pi.productID,pi.quantity_in, pi.quantity_out, pi.created_at, @balance := @balance + pi.quantity_in - pi.quantity_out AS balance
