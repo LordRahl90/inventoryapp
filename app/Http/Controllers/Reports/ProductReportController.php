@@ -44,7 +44,7 @@ class ProductReportController extends Controller
               FROM (product_inventories pi INNER JOIN products pr on pr.id=pi.productID),(SELECT @balance := 0) bl WHERE productID=".$productID." 
               AND pi.created_at BETWEEN '".$startDate."' AND '".$endDate."' ";
 
-        dd($sql);
+        dd($productID);
             $result=$db->query($sql)->fetchAll(\PDO::FETCH_ASSOC);
 
         $inputData=json_encode([
