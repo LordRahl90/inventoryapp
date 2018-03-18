@@ -39,7 +39,7 @@ class ProductReportController extends Controller
         $startDate=Input::get("startDate")." 00:00:00";
         $endDate=Input::get("endDate")." 23:59:59";
 
-        $v=Validator::mak(Input::all(),[
+        $v=Validator::make(Input::all(),[
             "productID"=>"required",
             "reportFormat"=>"required",
             "startDate"=>"required",
