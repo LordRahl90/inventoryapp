@@ -1,7 +1,7 @@
 <!-- Productid Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('productID', 'Productid:') !!}
-    {!! Form::select('productID', [], null, ['class' => 'form-control']) !!}
+    {!! Form::select('productID', $products, null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Documentref Field -->

@@ -66,3 +66,12 @@ Route::resource('productProcurements', 'ProductProcurementController');
 
 Route::get("orders/print/{orderRef}",["as"=>"orders.print","uses"=>"OrderProcessController@print"]);
 Route::get("orders/process/{orderRef}",["as"=>"orders.process","uses"=>"OrderProcessController@process"]);
+
+Route::group(["prefix"=>"reports"], function(){
+
+    Route::get("/products/generate","Reports\ProductReportController@loadView");
+    Route::post("/products/generate","Reports\ProductReportController@generateReport");
+
+    Route::get("/stock/balance/current","Reports\StockBalanceReport@loadCurrentBalance");
+
+});

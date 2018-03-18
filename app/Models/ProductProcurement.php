@@ -96,9 +96,13 @@ class ProductProcurement extends Model
     public static $rules = [
         'productID' => 'required|exists:products,id',
         'documentRef' => 'required',
-        'quantity' => 'price double,30,2 text',
-        'price' => 'required'
+        'quantity' => 'required',
+        'price' => 'required',
+        "narration"=>"required"
     ];
 
+    public function product(){
+        return $this->belongsTo("App\Models\Product","productID","id");
+    }
     
 }

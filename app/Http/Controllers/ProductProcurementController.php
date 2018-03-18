@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProductProcurementRequest;
 use App\Http\Requests\UpdateProductProcurementRequest;
+use App\Repositories\ProductInventoryRepository;
 use App\Repositories\ProductProcurementRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Repositories\ProductRepository;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
@@ -26,6 +30,7 @@ class ProductProcurementController extends AppBaseController
      *
      * @param Request $request
      * @return Response
+     * @throws \Prettus\Repository\Exceptions\RepositoryException
      */
     public function index(Request $request)
     {
@@ -41,26 +46,56 @@ class ProductProcurementController extends AppBaseController
      *
      * @return Response
      */
-    public function create()
+    public function create(ProductRepository $productRepository)
     {
-        return view('product_procurements.create');
+        $productsArray=[""=>"Select Product"];
+        $products=$productRepository->orderBy("name","asc")->get();
+
+        foreach ($products as $product){
+            $productsArray[$product->id]=$product->name;
+        }
+
+        return view('product_procurements.create',["products"=>$productsArray]);
     }
 
     /**
      * Store a newly created ProductProcurement in storage.
      *
      * @param CreateProductProcurementRequest $request
-     *
-     * @return Response
+     * @param ProductInventoryRepository $inventoryRepository
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(CreateProductProcurementRequest $request)
+    public function store(CreateProductProcurementRequest $request, ProductInventoryRepository $inventoryRepository)
     {
-        $input = $request->all();
+        DB::beginTransaction();
 
-        $productProcurement = $this->productProcurementRepository->create($input);
+        try{
+            $input = $request->all();
 
-        Flash::success('Product Procurement saved successfully.');
+            $productProcurement = $this->productProcurementRepository->create($input);
 
+            //add this process to the inventory as well.
+            $inventoryRecord=$inventoryRepository->create([
+                "productID"=>$input["productID"],
+                "inventoryRef"=>$input["documentRef"],
+                "quantity_in"=>0,
+                "quantity_out"=>$input["quantity"],
+                "narration"=>$input["narration"]
+            ]);
+
+            if(!$inventoryRecord){
+                Flash::error("An error occurred...");
+                throw new \Exception("Cannot Process this order... Entry error...");
+            }
+
+            Flash::success('Product Procurement saved successfully.');
+
+            DB::commit();
+        }
+        catch(\Exception $ex){
+            DB::rollBack();
+            Log::info($ex->getMessage());
+        }
         return redirect(route('productProcurements.index'));
     }
 

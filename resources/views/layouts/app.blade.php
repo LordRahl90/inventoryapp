@@ -13,6 +13,8 @@
 {{--    <link rel="stylesheet" href="{{ asset("product/dist/css/AdminLTE.min.css") }}">--}}
     <link rel="stylesheet" href="{{ asset("product/dist/css/skins/_all-skins.min.css") }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/skins/square/_all.css">
+    <link rel="stylesheet" href="{{ asset("public/vendor/datatables/media/css/dataTables.bootstrap.min.css") }}" />
+    <link rel="stylesheet" href="{{ asset("public/vendor/datatables/media/css/jquery.dataTables.min.css") }}" />
 
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -151,6 +153,8 @@
     <script src="{{ asset("product/dist/js/jquery.min.js") }}"></script>
     <script src="{{ asset("product/assets/js/bootstrap.min.js") }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
+    <script src="{{ asset("public/vendor/datatables/media/js/jquery.dataTables.min.js") }}"></script>
+    <script src="{{ asset("public/vendor/datatables/media/js/dataTables.bootstrap.min.js") }}"></script>
 
     <!-- AdminLTE App -->
     <script src="{{ asset("product/dist/js/app.min.js") }}"></script>

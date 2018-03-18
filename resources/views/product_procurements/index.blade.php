@@ -14,10 +14,16 @@
 
         <div class="clearfix"></div>
         <div class="box box-primary">
-            <div class="box-body">
+            <div class="box-body" style="height: 50%; overflow: auto">
                     @include('product_procurements.table')
             </div>
         </div>
     </div>
 @endsection
+@section("scripts")
+    <script>
+        $(function(){
 
+        });
+    </script>
+@endsection

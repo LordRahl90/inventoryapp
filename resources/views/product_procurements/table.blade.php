@@ -2,17 +2,17 @@
     <thead>
         <tr>
             <th>Product</th>
-        <th>Document Ref</th>
-        <th>Narration</th>
-        <th>Quantity</th>
-        <th>Price</th>
+            <th>Document Ref</th>
+            <th>Narration</th>
+            <th>Quantity</th>
+            <th>Price</th>
             <th colspan="3">Action</th>
         </tr>
     </thead>
     <tbody>
     @foreach($productProcurements as $productProcurement)
         <tr>
-            <td>{!! $productProcurement->productID !!}</td>
+            <td>{!! $productProcurement->product->name !!}</td>
             <td>{!! $productProcurement->documentRef !!}</td>
             <td>{!! $productProcurement->narration !!}</td>
             <td>{!! $productProcurement->quantity !!}</td>
