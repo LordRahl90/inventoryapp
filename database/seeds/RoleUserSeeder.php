@@ -16,5 +16,10 @@ class RoleUserSeeder extends Seeder
             "role_id"=>3
         ]);
 
+        \App\Models\RoleUser::create([
+            "user_id"=>3,
+            "role_id"=>3
+        ]);
+
     }
 }

@@ -24,52 +24,55 @@ $user=User::find(auth()->user()->id);
         <li class="{{ Request::is('roleUsers*') ? 'active' : '' }}">
             <a href="{!! route('roleUsers.index') !!}"><i class="fa fa-edit"></i><span>Role Users</span></a>
         </li>
+
+        <li class="{{ Request::is('reports*') ? 'active' : '' }} treeview">
+            <a href="#">
+                <i class="fa fa-folder"></i>  Reports
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="/reports/products/generate">Orders</a></li>
+                <li><a href="/reports/stock/balance/current">Current Stock Balance</a></li>
+                <li><a href="#">Previous Stock Balance</a></li>
+            </ul>
+        </li>
     @endif
+
+    <li class="{{ Request::is('productCategories*') ? 'active' : '' }}">
+        <a href="{!! route('productCategories.index') !!}"><i class="fa fa-edit"></i><span>Product Categories</span></a>
+    </li>
+
+    <li class="{{ Request::is('productSubCategories*') ? 'active' : '' }}">
+        <a href="{!! route('productSubCategories.index') !!}"><i class="fa fa-edit"></i><span>Product Sub Categories</span></a>
+    </li>
+
+
+    <li class="{{ Request::is('customers*') ? 'active' : '' }}">
+        <a href="{!! route('customers.index') !!}"><i class="fa fa-edit"></i><span>Customers</span></a>
+    </li>
+
+    <li class="{{ Request::is('products*') ? 'active' : '' }}">
+        <a href="{!! route('products.index') !!}"><i class="fa fa-edit"></i><span>Products</span></a>
+    </li>
+
+    <li class="{{ Request::is('orders*') ? 'active' : '' }}">
+        <a href="{!! route('orders.index') !!}"><i class="fa fa-edit"></i><span>Orders</span></a>
+    </li>
+
+    {{--<li class="{{ Request::is('orderDetails*') ? 'active' : '' }}">--}}
+    {{--<a href="{!! route('orderDetails.index') !!}"><i class="fa fa-edit"></i><span>Order Details</span></a>--}}
+    {{--</li>--}}
+
+    <li class="{{ Request::is('productInventories*') ? 'active' : '' }}">
+        <a href="{!! route('productInventories.index') !!}"><i class="fa fa-edit"></i><span>Product Inventories</span></a>
+    </li>
+
+    <li class="{{ Request::is('productProcurements*') ? 'active' : '' }}">
+        <a href="{!! route('productProcurements.index') !!}"><i class="fa fa-edit"></i><span>Product Procurements</span></a>
+    </li>
+
+
 @endif
-<li class="{{ Request::is('productCategories*') ? 'active' : '' }}">
-    <a href="{!! route('productCategories.index') !!}"><i class="fa fa-edit"></i><span>Product Categories</span></a>
-</li>
-
-<li class="{{ Request::is('productSubCategories*') ? 'active' : '' }}">
-    <a href="{!! route('productSubCategories.index') !!}"><i class="fa fa-edit"></i><span>Product Sub Categories</span></a>
-</li>
-
-
-<li class="{{ Request::is('customers*') ? 'active' : '' }}">
-    <a href="{!! route('customers.index') !!}"><i class="fa fa-edit"></i><span>Customers</span></a>
-</li>
-
-<li class="{{ Request::is('products*') ? 'active' : '' }}">
-    <a href="{!! route('products.index') !!}"><i class="fa fa-edit"></i><span>Products</span></a>
-</li>
-
-<li class="{{ Request::is('orders*') ? 'active' : '' }}">
-    <a href="{!! route('orders.index') !!}"><i class="fa fa-edit"></i><span>Orders</span></a>
-</li>
-
-<li class="{{ Request::is('orderDetails*') ? 'active' : '' }}">
-    <a href="{!! route('orderDetails.index') !!}"><i class="fa fa-edit"></i><span>Order Details</span></a>
-</li>
-
-<li class="{{ Request::is('productInventories*') ? 'active' : '' }}">
-    <a href="{!! route('productInventories.index') !!}"><i class="fa fa-edit"></i><span>Product Inventories</span></a>
-</li>
-
-<li class="{{ Request::is('productProcurements*') ? 'active' : '' }}">
-    <a href="{!! route('productProcurements.index') !!}"><i class="fa fa-edit"></i><span>Product Procurements</span></a>
-</li>
-
-<li class="{{ Request::is('reports*') ? 'active' : '' }} treeview">
-    <a href="#">
-        <i class="fa fa-folder"></i>  Reports
-        <i class="fa fa-angle-left pull-right"></i>
-    </a>
-    <ul class="treeview-menu">
-        <li><a href="/reports/products/generate">Orders</a></li>
-        <li><a href="/reports/stock/balance/current">Current Stock Balance</a></li>
-        <li><a href="#">Previous Stock Balance</a></li>
-    </ul>
-</li>
 
 
 

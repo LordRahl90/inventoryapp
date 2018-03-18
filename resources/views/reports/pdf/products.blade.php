@@ -5,6 +5,7 @@
  * Date: 18/03/2018
  * Time: 8:08 PM
  */
+$total=0;
 ?>
 <h1 align="center">CardinalStone&trade; Partners</h1>
 <h3 align="center">Report For {{ $product->name }}</h3>
