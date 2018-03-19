@@ -55,7 +55,8 @@ class ProductController extends AppBaseController
 
         return view('products.create',[
             "categories"=>$categoryArray,
-            "subCategories"=>null
+            "subCategories"=>[],
+            "product"=>null
         ]);
     }
 
