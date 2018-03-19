@@ -76,7 +76,6 @@ class OrderController extends AppBaseController
         OrderDetailRepository $orderDetailRepository)
     {
 
-        dd($request->all());
         DB::beginTransaction();
         try{
             $input = $request->all();
