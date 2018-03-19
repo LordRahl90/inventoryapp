@@ -115,31 +115,45 @@ class OrderController extends AppBaseController
                 $product=$products[$i];
                 $quantity=$quantities[$i];
 
-                if($product!=null && $quantity!=null){
-                    $price=Product::find($product)->price;
 
-                    $orderDetail=$orderDetailRepository->create([
-                        "orderID"=>$order->id,
-                        "productID"=>$product,
-                        "price"=>$price,
-                        "quantity"=>$quantity
-                    ]);
+                if($product!==null){
+                    //we need to check if the remaining quantity in stock matches what the user wants to buy
+                    $productDetails=Product::find($product);
+                    $db=DB::getPDO();
+                    $sql="SELECT (sum(quantity_in)-sum(quantity_out)) as currentTotal FROM product_inventories WHERE productID=$product";
+                    $productCount=$db->query($sql)->fetch(\PDO::FETCH_ASSOC);
+                    $currentTotal=$productCount["currentTotal"];
 
-                    if(!$orderDetail){
-                        Log::info("An error occurred While creating an order detail");
+                    if($currentTotal==null || $currentTotal<$quantity){
+                        throw new \Exception("The requested quantity is more that the amount in stock for ".$productDetails->name);
+                    }
+                    else{
+                        if($product!=null && $quantity!=null){
+                            $price=Product::find($product)->price;
+
+                            $orderDetail=$orderDetailRepository->create([
+                                "orderID"=>$order->id,
+                                "productID"=>$product,
+                                "price"=>$price,
+                                "quantity"=>$quantity
+                            ]);
+
+                            if(!$orderDetail){
+                                Log::info("An error occurred While creating an order detail");
+                            }
+                        }
                     }
                 }
             }
-
+            DB::commit();
             Flash::success('Order saved successfully.');
         }
         catch(\Exception $ex){
             DB::rollBack();
-            dd($ex->getMessage());
-            Flash::error("An error occurred");
+//            dd($ex->getMessage());
+            Flash::error($ex->getMessage());
         }
 
-        DB::commit();
         return redirect(route('orders.index'));
     }
 
