@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->string('orderRef');
             $table->integer('customerID')->unsigned();
             $table->string('customerPhone');
-            $table->boolean("status");
+            $table->boolean("status")->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('customerID')->references('id')->on('customers');
