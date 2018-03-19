@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('/home', 'Admin\HomeController@index');
 
 
-Route::group(["middleware"=>["role:admin"]], function(){
+Route::group(["middleware"=>["auth"]], function(){
 
     Route::resource('users', 'UserController');
 
@@ -45,33 +45,33 @@ Route::group(["middleware"=>["role:admin"]], function(){
 
     Route::resource('roleUsers', 'RoleUserController');
     Route::resource('permissionRoles', 'PermissionRoleController')->middleware("auth");
+
+    Route::resource('productCategories', 'ProductCategoryController');
+
+    Route::resource('productSubCategories', 'ProductSubCategoryController');
+
+    Route::resource('customers', 'CustomerController');
+
+    Route::resource('products', 'ProductController');
+
+    Route::resource('orders', 'OrderController');
+
+    Route::resource('orderDetails', 'OrderDetailController');
+
+    Route::resource('productInventories', 'ProductInventoryController');
+
+    Route::resource('productProcurements', 'ProductProcurementController');
+
+    Route::get("orders/print/{orderRef}",["as"=>"orders.print","uses"=>"OrderProcessController@print"]);
+    Route::get("orders/process/{orderRef}",["as"=>"orders.process","uses"=>"OrderProcessController@process"]);
+
+    Route::group(["prefix"=>"reports"], function(){
+
+        Route::get("/products/generate","Reports\ProductReportController@loadView");
+        Route::post("/products/generate","Reports\ProductReportController@generateReport");
+
+        Route::get("/stock/balance/current","Reports\StockBalanceReport@loadCurrentBalance");
+
+    });
 });
 
-
-Route::resource('productCategories', 'ProductCategoryController');
-
-Route::resource('productSubCategories', 'ProductSubCategoryController');
-
-Route::resource('customers', 'CustomerController');
-
-Route::resource('products', 'ProductController');
-
-Route::resource('orders', 'OrderController');
-
-Route::resource('orderDetails', 'OrderDetailController');
-
-Route::resource('productInventories', 'ProductInventoryController');
-
-Route::resource('productProcurements', 'ProductProcurementController');
-
-Route::get("orders/print/{orderRef}",["as"=>"orders.print","uses"=>"OrderProcessController@print"]);
-Route::get("orders/process/{orderRef}",["as"=>"orders.process","uses"=>"OrderProcessController@process"]);
-
-Route::group(["prefix"=>"reports"], function(){
-
-    Route::get("/products/generate","Reports\ProductReportController@loadView");
-    Route::post("/products/generate","Reports\ProductReportController@generateReport");
-
-    Route::get("/stock/balance/current","Reports\StockBalanceReport@loadCurrentBalance");
-
-});
