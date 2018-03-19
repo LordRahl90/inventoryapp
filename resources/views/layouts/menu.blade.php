@@ -2,11 +2,12 @@
 
 use App\Models\User;
 $user=User::find(auth()->user()->id);
+//dd($user->hasRole("admin"));
 ?>
 
 @if(auth()->check())
 
-    @if($user->hasRole("admin"))
+    {{--@if($user->hasRole("admin"))--}}
         <li class="{{ Request::is('users*') ? 'active' : '' }}">
             <a href="{!! route('users.index') !!}"><i class="fa fa-edit"></i><span>Users</span></a>
         </li>
@@ -25,7 +26,7 @@ $user=User::find(auth()->user()->id);
         <li class="{{ Request::is('roleUsers*') ? 'active' : '' }}">
             <a href="{!! route('roleUsers.index') !!}"><i class="fa fa-edit"></i><span>Role Users</span></a>
         </li>
-    @endif
+    {{--@endif--}}
 
     <li class="{{ Request::is('productCategories*') ? 'active' : '' }}">
         <a href="{!! route('productCategories.index') !!}"><i class="fa fa-edit"></i><span>Product Categories</span></a>
@@ -60,7 +61,7 @@ $user=User::find(auth()->user()->id);
         <a href="{!! route('productProcurements.index') !!}"><i class="fa fa-edit"></i><span>Product Procurements</span></a>
     </li>
 
-    @if($user->hasRole("admin"))
+    {{--@if($user->hasRole("admin"))--}}
     <li class="{{ Request::is('reports*') ? 'active' : '' }} treeview">
         <a href="#">
             <i class="fa fa-folder"></i>  Reports
@@ -72,7 +73,7 @@ $user=User::find(auth()->user()->id);
             <li><a href="#">Previous Stock Balance</a></li>
         </ul>
     </li>
-    @endif
+    {{--@endif--}}
 
 @endif
 
