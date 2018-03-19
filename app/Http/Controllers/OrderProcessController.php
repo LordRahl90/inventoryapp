@@ -142,8 +142,8 @@ class OrderProcessController extends Controller
                     $inventoryRecord=$inventoryRepository->create([
                         "productID"=>$detail->productID,
                         "inventoryRef"=>$order->orderRef,
-                        "quantity_in"=>$detail->quantity,
-                        "quantity_out"=>0,
+                        "quantity_in"=>0,
+                        "quantity_out"=>$detail->quantity,
                         "narration"=>$order->customer->firstnme." ".$order->customer->other_names
                     ]);
 

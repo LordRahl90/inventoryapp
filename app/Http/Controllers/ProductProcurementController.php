@@ -78,8 +78,8 @@ class ProductProcurementController extends AppBaseController
             $inventoryRecord=$inventoryRepository->create([
                 "productID"=>$input["productID"],
                 "inventoryRef"=>$input["documentRef"],
-                "quantity_in"=>0,
-                "quantity_out"=>$input["quantity"],
+                "quantity_in"=>$input["quantity"],
+                "quantity_out"=>0,
                 "narration"=>$input["narration"]
             ]);
 
