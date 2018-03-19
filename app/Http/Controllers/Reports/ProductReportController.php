@@ -55,7 +55,7 @@ class ProductReportController extends Controller
               FROM (product_inventories pi INNER JOIN products pr on pr.id=pi.productID),(SELECT @balance := 0) bl WHERE productID=".$productID." 
               AND pi.created_at BETWEEN '".$startDate."' AND '".$endDate."' ";
 
-            $result=$db->query($sql)->fetchAll(\PDO::FETCH_ASSOC);
+        $result=$db->query($sql)->fetchAll(\PDO::FETCH_ASSOC);
 
         $inputData=json_encode([
             "startDate"=>$startDate,
@@ -128,7 +128,7 @@ class ProductReportController extends Controller
                     $total=$data->balance;
                 }
 
-                $sheet->mergeCells("A$rowCount:D$rowCount");
+                $sheet->mergeCells("A$rowCount:C$rowCount");
                 $sheet->cell("A".$rowCount, function($cell){
                     $cell->setFontWeight("bold");
                     $cell->setAlignment("right");
